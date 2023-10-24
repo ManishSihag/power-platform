@@ -1,0 +1,27 @@
+name: Deploy Solution
+
+on:
+  workflow_run:
+    workflows: ["Pack Solution"]
+    branches: [main]
+    types:
+      - completed
+  workflow_dispatch:
+
+jobs:
+  Deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    environment: production
+    steps:
+      - uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: pack-solution.yml
+          name: packed-solution
+      - uses: microsoft/powerplatform-actions/import-solution@v1.2.0
+        with:
+          environment-url: orgc022fe06.crm3.dynamics.com
+          app-id: ${{ secrets.APPID }}
+          client-secret: ${{ secrets.SECRET }}
+          tenant-id: ${{ secrets.TENANTID }}
+          solution-file: contoso_university_core_managed.zip
