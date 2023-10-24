@@ -11,7 +11,7 @@ on:
 jobs:
   Deploy:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    # if: ${{ github.event.workflow_run.conclusion == 'success' }}
     environment: production
     steps:
       - uses: microsoft/powerplatform-actions/actions-install@v1.2.0
