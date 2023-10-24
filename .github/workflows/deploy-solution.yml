@@ -14,12 +14,15 @@ jobs:
     # if: ${{ github.event.workflow_run.conclusion == 'success' }}
     environment: production
     steps:
-      - uses: microsoft/powerplatform-actions/actions-install@v1.2.0
-      - uses: dawidd6/action-download-artifact@v2
+      - name: Install Power Platform
+        uses: microsoft/powerplatform-actions/actions-install@v1.2.0
+      - name: Download Artifact  
+        uses: dawidd6/action-download-artifact@v2
         with:
           workflow: pack-solution.yml
           name: packed-solution
-      - uses: microsoft/powerplatform-actions/import-solution@v1.2.0
+      - name: Import solution
+        uses: microsoft/powerplatform-actions/import-solution@v1.2.0
         with:
           environment-url: 'https://orgc022fe06.crm3.dynamics.com'
           app-id: ${{ secrets.APPID }}
