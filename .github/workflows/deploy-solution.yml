@@ -21,7 +21,7 @@ jobs:
           name: packed-solution
       - uses: microsoft/powerplatform-actions/import-solution@v1.2.0
         with:
-          environment-url: orgc022fe06.crm3.dynamics.com
+          environment-url: 'orgc022fe06.crm3.dynamics.com'
           app-id: ${{ secrets.APPID }}
           client-secret: ${{ secrets.SECRET }}
           tenant-id: ${{ secrets.TENANTID }}
